@@ -31,6 +31,8 @@ public class Movement : MonoBehaviour
         animator = GetComponent < Animator>();
         
         IsFacingRight = true;
+        animator.SetBool("IsJumping", false);
+
     }
 
     // Update is called once per frame
@@ -58,9 +60,17 @@ public class Movement : MonoBehaviour
         if (IsJumping && rb.velocity.y < 0)
 		{
 			IsJumping = false;
+            animator.SetBool("IsJumping", false);
+
 		}
-        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer))//checks if set box overlaps with ground
+        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer)){//checks if set box overlaps with ground
 			LastOnGroundTime = coyoteTime;
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsGround", true);
+
+        }else{
+            animator.SetBool("IsGround", false);
+        }
         if(Input.GetKey("w"))
         {
             if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping){ //checks if set box overlaps with ground
@@ -68,11 +78,13 @@ public class Movement : MonoBehaviour
                 //LastPressedJumpTime = 0.5f;
                 Jump();
                 IsJumping = true;
+                animator.SetBool("IsJumping", true);
             }
             if(LastOnGroundTime > 0)
             {
                 Jump();
                 IsJumping = true;
+                animator.SetBool("IsJumping", true);
             }
         }
     }
