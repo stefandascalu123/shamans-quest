@@ -20,12 +20,15 @@ public class Movement : MonoBehaviour
 
     private Vector2 _moveInput;
     private float LastOnGroundTime;
+
+    private Animator animator;
     // private float LastPressedJumpTime;
     // last pressed momentan nu face nimic
     // last ground inseamna cat poti inca sa sari dupa ce nu mai esti pe ground
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent < Animator>();
         
         IsFacingRight = true;
     }
@@ -41,9 +44,16 @@ public class Movement : MonoBehaviour
         _moveInput.y = Input.GetAxis("Vertical");
 
         rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
-        
+
         if (_moveInput.x != 0)
-			CheckDirectionToFace(_moveInput.x > 0);
+        {
+            animator.SetBool("IsRunning", true);
+            CheckDirectionToFace(_moveInput.x > 0);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+        }
 
         if (IsJumping && rb.velocity.y < 0)
 		{
