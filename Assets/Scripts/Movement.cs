@@ -32,7 +32,6 @@ public class Movement : MonoBehaviour
         
         IsFacingRight = true;
         animator.SetBool("IsJumping", false);
-
     }
 
     // Update is called once per frame
@@ -40,7 +39,6 @@ public class Movement : MonoBehaviour
     {
         
         LastOnGroundTime -= Time.deltaTime;
-        //LastPressedJumpTime -= Time.deltaTime;
 
         _moveInput.x = Input.GetAxis("Horizontal");
         _moveInput.y = Input.GetAxis("Vertical");
@@ -63,24 +61,23 @@ public class Movement : MonoBehaviour
             animator.SetBool("IsJumping", false);
 
 		}
-        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer)){//checks if set box overlaps with ground
-			LastOnGroundTime = coyoteTime;
+        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping){
+			//LastOnGroundTime = coyoteTime;
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsGround", true);
 
         }else{
             animator.SetBool("IsGround", false);
         }
-        if(Input.GetKey("w"))
+        if(Input.GetKeyDown("w"))
         {
-            if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping){ //checks if set box overlaps with ground
-				LastOnGroundTime = 0.5f; //if so sets the lastGrounded to coyoteTime
+            if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping){ 
+				LastOnGroundTime = coyoteTime; //if so sets the lastGrounded to coyoteTime
                 //LastPressedJumpTime = 0.5f;
                 Jump();
                 IsJumping = true;
                 animator.SetBool("IsJumping", true);
-            }
-            if(LastOnGroundTime > 0)
+            }else if(LastOnGroundTime > 0 && !IsJumping)
             {
                 Jump();
                 IsJumping = true;
