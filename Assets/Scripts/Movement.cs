@@ -4,32 +4,23 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    private float speed;
+    [SerializeField] private float speed;
     public Rigidbody2D rb;
     private bool IsFacingRight;
-    public bool IsJumping;
-
-    [SerializeField] [Range(0.1f,0.5f)]
-    private float coyoteTime;
+    private bool IsJumping;
+    private bool IsGrounded;
+    private float LastOnGroundTime;
+    [SerializeField] [Range(0.1f,0.5f)] private float coyoteTime;
     [SerializeField] private Transform _groundCheckPoint;
-	//Size of groundCheck depends on the size of your character generally you want them slightly small than width (for ground) and height (for the wall check)
 	[SerializeField] private Vector2 _groundCheckSize = new Vector2(0.85f, 0.03f);
     [SerializeField] private LayerMask _groundLayer;
 
     private Vector2 _moveInput;
-    private float LastOnGroundTime;
-
     private Animator animator;
-    // private float LastPressedJumpTime;
-    // last pressed momentan nu face nimic
-    // last ground inseamna cat poti inca sa sari dupa ce nu mai esti pe ground
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent < Animator>();
-        
+        animator = GetComponent <Animator>();
         IsFacingRight = true;
         animator.SetBool("IsJumping", false);
     }
@@ -37,7 +28,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        IsGrounded = Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer);
         LastOnGroundTime -= Time.deltaTime;
 
         _moveInput.x = Input.GetAxis("Horizontal");
@@ -56,36 +47,34 @@ public class Movement : MonoBehaviour
         }
 
         if (IsJumping && rb.velocity.y < 0)
-		{
+        {
 			IsJumping = false;
             animator.SetBool("IsJumping", false);
-
 		}
-        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping){
-			//LastOnGroundTime = coyoteTime;
-            animator.SetBool("IsJumping", false);
-            animator.SetBool("IsGround", true);
 
-        }else{
-            animator.SetBool("IsGround", false);
-        }
-        if(Input.GetKeyDown("w"))
-        {
-            if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping){ 
-				LastOnGroundTime = coyoteTime; //if so sets the lastGrounded to coyoteTime
-                //LastPressedJumpTime = 0.5f;
-                Jump();
-                IsJumping = true;
-                animator.SetBool("IsJumping", true);
-            }else if(LastOnGroundTime > 0 && !IsJumping)
+        if (IsGrounded && !IsJumping){
+            LastOnGroundTime = coyoteTime;
+            animator.SetBool("IsGround", true);
+            animator.SetBool("IsJumping", false);
+            if(Input.GetKeyDown("w"))
             {
                 Jump();
                 IsJumping = true;
                 animator.SetBool("IsJumping", true);
+                animator.SetBool("IsGround", false);
+            }
+        }
+        else if(LastOnGroundTime > 0 && !IsJumping)
+        {
+            if(Input.GetKeyDown("w"))
+            {
+                Jump();
+                IsJumping = true;
+                animator.SetBool("IsJumping", true);
+                animator.SetBool("IsGround", false);
             }
         }
     }
-    
     public void CheckDirectionToFace(bool isMovingRight)
 	{
 		if (isMovingRight != IsFacingRight)
@@ -102,7 +91,6 @@ public class Movement : MonoBehaviour
 	}
     private void Jump(){
 
-        //LastPressedJumpTime = 0;
 		LastOnGroundTime = 0;
 
         float force = 5;
@@ -110,11 +98,6 @@ public class Movement : MonoBehaviour
 			    force -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-    }
-    //degeaba momentan vad daca mai fac ceva la ea :)))
-    private bool CanJump()
-    {
-		return LastOnGroundTime > 0 && !IsJumping;
     }
     private void OnDrawGizmosSelected()
     {
