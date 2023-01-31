@@ -8,9 +8,9 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     private bool IsFacingRight;
     private bool IsJumping;
-    private bool IsGrounded;
+    public bool IsGrounded;
     private float LastOnGroundTime;
-    [SerializeField] [Range(0.1f,0.5f)] private float coyoteTime;
+    [SerializeField] [Range(0f,0.5f)] private float coyoteTime = 0;
     [SerializeField] private Transform _groundCheckPoint;
 	[SerializeField] private Vector2 _groundCheckSize = new Vector2(0.85f, 0.03f);
     [SerializeField] private LayerMask _groundLayer;
@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour
     {
         IsGrounded = Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer);
         LastOnGroundTime -= Time.deltaTime;
+        animator.SetBool("IsGround", IsGrounded);
 
         _moveInput.x = Input.GetAxis("Horizontal");
         _moveInput.y = Input.GetAxis("Vertical");
@@ -94,8 +95,8 @@ public class Movement : MonoBehaviour
 		LastOnGroundTime = 0;
 
         float force = 5;
-		    if (rb.velocity.y < 0)
-			    force -= rb.velocity.y;
+		if (rb.velocity.y < 0)
+	        force -= rb.velocity.y;
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
