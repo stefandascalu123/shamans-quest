@@ -235,7 +235,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f8279f9f7b1ad004894fb09ea2a35ba1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 424f4c958e925df4f8f8051cb3802f13, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -264,7 +264,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e832ed8e9e217084ea10b5c39033af36, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8f3d7f09b4cabe141abfaffd3df07cf0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -360,7 +360,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1c8fdbf0ae5b3b440b1cc73a5336041d, type: 2}
+  m_Motion: {fileID: 7400000, guid: a51bd5181e5fd2c459b70614b5ca37b3, type: 2}
   m_Tag: Falling_Shaman
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -439,7 +439,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cb19d842156aad84189d7dc91620c998, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6b0c5843cabfc794f90a6eae3fb6c8cd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

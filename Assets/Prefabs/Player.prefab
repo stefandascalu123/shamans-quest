@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 6296330424212180954}
   - component: {fileID: 6296330424212180951}
   - component: {fileID: 6296330424212180950}
+  - component: {fileID: 824106152}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rb: {fileID: 6296330424212180954}
-  coyoteTime: 0.3
+  IsGrounded: 0
+  coyoteTime: 0
   _groundCheckPoint: {fileID: 6296330424753224252}
   _groundCheckSize: {x: 0.55, y: 0.06}
   _groundLayer:
@@ -177,6 +179,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.14456442, y: 0.29443085}
   m_EdgeRadius: 0
+--- !u!114 &824106152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296330424212180953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91aa948d7ec2d8940bba1e8dd1fb1d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalController: {fileID: 9100000, guid: 29bb2fe59757b724b87e478af90ce684, type: 2}
+  spiritController: {fileID: 9100000, guid: 67598f900d4ba3f4b84f721fa90a365c, type: 2}
+  isSpirit: 0
+  shiftCooldown: 1
 --- !u!1 &6296330424753224227
 GameObject:
   m_ObjectHideFlags: 0
