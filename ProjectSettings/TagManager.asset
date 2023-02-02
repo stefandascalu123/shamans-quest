@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Spirit
+  - Earth
+  - Both
   layers:
   - Default
   - TransparentFX
