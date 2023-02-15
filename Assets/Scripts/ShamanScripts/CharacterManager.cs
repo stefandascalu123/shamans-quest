@@ -23,7 +23,7 @@ public class CharacterManager : MonoBehaviour
     void FixedUpdate()
     {
         shiftTimer -= Time.fixedDeltaTime;
-        if(Input.GetKey("f") && shiftTimer <= 0)
+        if(Input.GetKeyDown("f") && shiftTimer <= 0)
         {
             if (!isSpirit) 
             {

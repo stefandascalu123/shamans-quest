@@ -75,6 +75,10 @@ public class Movement : MonoBehaviour
                 animator.SetBool("IsGround", false);
             }
         }
+
+        if (Input.GetKey("y"))
+            transform.position = Vector3.zero;
+
     }
     public void CheckDirectionToFace(bool isMovingRight)
 	{
