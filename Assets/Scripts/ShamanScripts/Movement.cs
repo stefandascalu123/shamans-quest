@@ -79,6 +79,14 @@ public class Movement : MonoBehaviour
         if (Input.GetKey("y"))
             transform.position = Vector3.zero;
 
+        if(Input.GetKeyDown("s")){
+            if(!IsGrounded){
+                Stomp();
+            }else{
+                Debug.Log("No Stomp");
+            }
+        }
+
     }
     public void CheckDirectionToFace(bool isMovingRight)
 	{
@@ -104,6 +112,13 @@ public class Movement : MonoBehaviour
 
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
+
+    private void Stomp(){
+        float force = 50;
+        rb.AddForce(Vector2.down * force, ForceMode2D.Impulse);
+        Debug.Log("Stomp");
+    }
+
     private void OnDrawGizmosSelected()
     {
 		Gizmos.color = Color.green;
