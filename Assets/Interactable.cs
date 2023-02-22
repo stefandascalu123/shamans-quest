@@ -1,22 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    CharacterManager characterManager;
-    GameObject[] gameObjects;
+    // this script is used for every object in the scene which is an interactable or which is influenced by an interactable
+
+    CharacterManager manager;
+    // transform of the child (the actual object)
+    Transform interactable;
+
+    Collider2D coll;
     void Start()
     {
-        gameObjects = GameObject.FindGameObjectsWithTag("Spirit");
+        manager = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
+        interactable = transform.GetChild(0);
+        if (gameObject.tag == "Spirit")
+            interactable.gameObject.SetActive(false);
+
+        if (GetComponent<Collider2D>() != null)
+            coll = GetComponent<Collider2D>();
     }
-
-    // Update is called once per frame
-    void Update()
+    void Update()   
     {
-        foreach (GameObject gameObject in gameObjects)
-            gameObject.SetActive(true);
-
+        if (manager.isSpirit)
+        {
+            if (gameObject.tag == "Spirit")
+            { 
+                interactable.gameObject.SetActive(true);
+                coll.enabled = true;
+            }
+            else if (gameObject.tag == "Earth")
+            {
+                interactable.gameObject.SetActive(false);
+                coll.enabled = false;
+            }
+        }
+        else
+        {
+            if (gameObject.tag == "Spirit")
+            {
+                interactable.gameObject.SetActive(false);
+                coll.enabled = false;
+            }
+            else if (gameObject.tag == "Earth")
+            {
+                interactable.gameObject.SetActive(true);
+                coll.enabled = true;
+            }
+        }
     }
 }

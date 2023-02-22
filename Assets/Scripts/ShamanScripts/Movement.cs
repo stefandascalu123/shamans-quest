@@ -81,9 +81,9 @@ public class Movement : MonoBehaviour
 
         if(Input.GetKeyDown("s")){
             if(!IsGrounded){
-                Stomp();
+                //Stomp();
             }else{
-                Debug.Log("No Stomp");
+                //Debug.Log("No Stomp");
             }
         }
 
@@ -114,7 +114,7 @@ public class Movement : MonoBehaviour
     }
 
     private void Stomp(){
-        float force = 50;
+        float force = 3;
         rb.AddForce(Vector2.down * force, ForceMode2D.Impulse);
         Debug.Log("Stomp");
     }
