@@ -5,12 +5,13 @@ using UnityEngine;
 public class BackgroundParalex : MonoBehaviour
 {
     private float length, startPosition;
-    public GameObject cam;
-    public float parallaxEffect;
+    private GameObject cam;
+    [SerializeField] private float parallaxEffect;
 
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.Find("MainCamera");
         startPosition = transform.position.x;
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
@@ -27,7 +28,7 @@ public class BackgroundParalex : MonoBehaviour
         //solutie: cine vede asta si rezolva pana imi dau eu seama il pup la interzis uwu
 
 
-        //if(temp> startPosition + length)startPosition += length;
-        //else if (temp < startPosition + length)startPosition -= length;
+        if(temp> startPosition + length)startPosition += length;
+        else if (temp < startPosition - length)startPosition -= length;
     }
 }
