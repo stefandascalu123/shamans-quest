@@ -12,6 +12,8 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField] private float shiftCooldown = 1f;
     private float shiftTimer;
+
+    [SerializeField] private TerrainChanger terrainChanger;
     void Start()
     {
         shiftTimer = 0;
@@ -23,7 +25,7 @@ public class CharacterManager : MonoBehaviour
     void FixedUpdate()
     {
         shiftTimer -= Time.fixedDeltaTime;
-        if(Input.GetKey("f") && shiftTimer <= 0)
+        if(Input.GetKey("f") && shiftTimer <= 0 && terrainChanger.shiftEnabled)
         {
             if (!isSpirit) 
             {
