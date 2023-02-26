@@ -57,7 +57,7 @@ public class Movement : MonoBehaviour
             LastOnGroundTime = coyoteTime;
             animator.SetBool("IsGround", true);
             animator.SetBool("IsJumping", false);
-            if(Input.GetKeyDown("w"))
+            if(Input.GetKey("w"))
             {
                 Jump();
                 IsJumping = true;
@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
         }
         else if(LastOnGroundTime > 0 && !IsJumping)
         {
-            if(Input.GetKeyDown("w"))
+            if(Input.GetKey("w"))
             {
                 Jump();
                 IsJumping = true;
@@ -79,11 +79,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey("y"))
             transform.position = Vector3.zero;
 
-        if(Input.GetKeyDown("s")){
+        if(Input.GetKey("s")){
             if(!IsGrounded){
-                //Stomp();
+                Stomp();
             }else{
-                //Debug.Log("No Stomp");
+                Debug.Log("No Stomp");
             }
         }
 
