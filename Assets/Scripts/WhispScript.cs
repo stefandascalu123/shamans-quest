@@ -29,7 +29,7 @@ public class WhispScript : MonoBehaviour
 
             if(Vector3.Distance(transform.position, stop) == 0){
                 start = stop;
-                if(nextPosition != wispPositions.Length - 1)
+                if(nextPosition < wispPositions.Length - 1)
                     nextPosition++;
                 stop = wispPositions[nextPosition].transform.position;
                 gameObject.GetComponent<Collider2D>().enabled = true;
@@ -41,8 +41,9 @@ public class WhispScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.CompareTag("Player")){
-            if(nextPosition == (wispPositions.Length - 1)){
-                    Destroy(gameObject);
+            if(nextPosition == (wispPositions.Length)){
+                Destroy(gameObject);
+                return;
             }else{
                 StartLerping();
             }

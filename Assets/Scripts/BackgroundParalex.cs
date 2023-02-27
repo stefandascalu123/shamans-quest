@@ -28,7 +28,9 @@ public class BackgroundParalex : MonoBehaviour
         //solutie: cine vede asta si rezolva pana imi dau eu seama il pup la interzis uwu
 
 
-        if(temp> startPosition + length)startPosition += length;
-        else if (temp < startPosition - length)startPosition -= length;
+        if(temp > startPosition + length - 3)
+            startPosition += length;
+        else if (temp < startPosition - length + 3)
+            startPosition -= length;
     }
 }

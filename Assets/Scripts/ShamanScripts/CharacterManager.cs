@@ -25,7 +25,7 @@ public class CharacterManager : MonoBehaviour
     void FixedUpdate()
     {
         shiftTimer -= Time.fixedDeltaTime;
-        if(Input.GetKey("f") && shiftTimer <= 0 && terrainChanger.shiftEnabled)
+        if(Input.GetMouseButton(0) && shiftTimer <= 0 && terrainChanger.shiftEnabled)
         {
             if (!isSpirit) 
             {
