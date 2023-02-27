@@ -25,24 +25,30 @@ public class TerrainChanger : MonoBehaviour
         {
             earthCollider.composite.isTrigger = true;
             earthRenderer.enabled = false;
+            earthRenderer.gameObject.layer = 0;
+            // cu functie alea alea
 
             spiritCollider.composite.isTrigger = false;
             spiritRenderer.enabled = true;
+            spiritRenderer.gameObject.layer = 6;
         }
-        else if (manager.isSpirit && earthRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
+        if (manager.isSpirit && earthRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
             shiftEnabled = false;
 
-        else if (!manager.isSpirit && !spiritRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
+        if (!manager.isSpirit && !spiritRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
         {
             spiritCollider.composite.isTrigger = true;
             spiritRenderer.enabled = false;
+            spiritRenderer.gameObject.layer = 0;
 
             earthCollider.composite.isTrigger = false;
             earthRenderer.enabled = true;
+            earthRenderer.gameObject.layer = 6;
         }
-        else if (!manager.isSpirit && spiritRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
+        if (!manager.isSpirit && spiritRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
             shiftEnabled = false;
-        else
+
+        if (!earthRenderer.gameObject.GetComponent<CollisionChecker>().inCollider && !spiritRenderer.gameObject.GetComponent<CollisionChecker>().inCollider)
             shiftEnabled = true;
     }
 }

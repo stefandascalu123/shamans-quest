@@ -106,7 +106,7 @@ public class Movement : MonoBehaviour
 
 		LastOnGroundTime = 0;
 
-        float force = 6.5f;
+        float force = 7f;
 		if (rb.velocity.y < 0)
 	        force -= rb.velocity.y;
 

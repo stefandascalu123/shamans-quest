@@ -18,10 +18,12 @@ public class CollisionChecker : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        inCollider = true;
+        if(collision.gameObject.tag == "Player")
+            inCollider = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        inCollider = false;
+        if (collision.gameObject.tag == "Player")
+            inCollider = false;
     }
 }
