@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhispScript : MonoBehaviour
+public class WispScript : MonoBehaviour
 {
     public GameObject[] wispPositions;
     int nextPosition = 0;
@@ -14,6 +14,7 @@ public class WhispScript : MonoBehaviour
 
     private Vector3 start;
     private Vector3 stop;
+    public GameObject switchObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +44,7 @@ public class WhispScript : MonoBehaviour
         if(col.gameObject.CompareTag("Player")){
             if(nextPosition == (wispPositions.Length)){
                 Destroy(gameObject);
+                switchObject.GetComponent<Switch>().on = true;
                 return;
             }else{
                 StartLerping();
