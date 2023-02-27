@@ -10,6 +10,7 @@ public class TerrainChanger : MonoBehaviour
     public Renderer earthRenderer;
     public Collider2D spiritCollider;
     public Collider2D earthCollider;
+    [SerializeField] private Camera cam;
     public bool shiftEnabled = true;
     private bool inWalls;
     void Start()

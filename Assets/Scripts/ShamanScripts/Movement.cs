@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     private bool IsFacingRight;
     private bool IsJumping;
     public bool IsGrounded;
+    public bool CanMove = true;
     private float LastOnGroundTime;
     [SerializeField] [Range(0f,0.5f)] private float coyoteTime = 0;
     [SerializeField] private Transform _groundCheckPoint;
@@ -31,11 +32,13 @@ public class Movement : MonoBehaviour
         IsGrounded = Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer);
         LastOnGroundTime -= Time.deltaTime;
         animator.SetBool("IsGround", IsGrounded);
-
-        _moveInput.x = Input.GetAxis("Horizontal");
-        _moveInput.y = Input.GetAxis("Vertical");
-
-        rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
+        if (CanMove)
+        {
+            _moveInput.x = Input.GetAxis("Horizontal");
+            _moveInput.y = Input.GetAxis("Vertical");
+            rb.velocity = new Vector2(_moveInput.x * speed, rb.velocity.y);
+        }
+            
 
         if (_moveInput.x != 0)
         {
@@ -57,7 +60,7 @@ public class Movement : MonoBehaviour
             LastOnGroundTime = coyoteTime;
             animator.SetBool("IsGround", true);
             animator.SetBool("IsJumping", false);
-            if(Input.GetKey("w"))
+            if(Input.GetKey("w") && CanMove)
             {
                 Jump();
                 IsJumping = true;
@@ -67,7 +70,7 @@ public class Movement : MonoBehaviour
         }
         else if(LastOnGroundTime > 0 && !IsJumping)
         {
-            if(Input.GetKey("w"))
+            if(Input.GetKey("w") && CanMove)
             {
                 Jump();
                 IsJumping = true;
