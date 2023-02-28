@@ -18,8 +18,8 @@ public class Switchable : MonoBehaviour
     {
         foreach(GameObject switchObj in switches)
         {
-            Switch @switch = switchObj.GetComponent<Switch>();
-            if (@switch.on == false)
+            bool on = switchObj.GetComponent<ToggleOnOff>().powered;
+            if (on == false)
             {
                 open = false;
                 break;

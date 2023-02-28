@@ -9,15 +9,18 @@ public class Switch : MonoBehaviour
     public Sprite onSprite;
     public Sprite offSprite;
     private Renderer switchRenderer;
+    public ToggleOnOff toggle;
+
     private float cooldown = 0.25f;
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
-        on = false;
         switchRenderer = GetComponentInChildren<SpriteRenderer>();
+        on = false;
     }
     void Update()
     {
+        toggle.powered = on;
         cooldown -= Time.deltaTime;
         if(on && GetComponentInChildren<Transform>().gameObject.activeSelf)
         {
