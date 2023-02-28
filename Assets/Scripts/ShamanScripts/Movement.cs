@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
 	[SerializeField] private Vector2 _groundCheckSize = new Vector2(0.85f, 0.03f);
     [SerializeField] private LayerMask _groundLayer;
 
-    private Vector2 _moveInput;
+    public Vector2 _moveInput;
     private Animator animator;
     void Start()
     {
