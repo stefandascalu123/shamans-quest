@@ -90,6 +90,11 @@ public class Movement : MonoBehaviour
             }
         }
 
+        if (IsGrounded)
+        {
+            rb.gravityScale = 1;
+        }
+
     }
     public void CheckDirectionToFace(bool isMovingRight)
 	{
@@ -117,8 +122,7 @@ public class Movement : MonoBehaviour
     }
 
     private void Stomp(){
-        float force = 3;
-        rb.AddForce(Vector2.down * force, ForceMode2D.Impulse);
+        rb.gravityScale = 10;
         Debug.Log("Stomp");
     }
 

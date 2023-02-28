@@ -5,10 +5,14 @@ using UnityEngine;
 public class Switchable : MonoBehaviour
 {
     public GameObject[] switches;
-    bool open = false;
+    public Sprite onSprite;
+    public Sprite offSprite;
+    private Renderer rend;
+
+    public bool open = false;
     void Start()
     {
-        
+        rend = GetComponentInChildren<SpriteRenderer>();
     }
     void Update()
     {
@@ -24,8 +28,8 @@ public class Switchable : MonoBehaviour
         }
         if (open)
             // fancy animation instead of disabling sper
-            transform.GetChild(0).gameObject.SetActive(false);
+            ((SpriteRenderer)rend).sprite = onSprite;
         else
-            transform.GetChild(0).gameObject.SetActive(true);
+            ((SpriteRenderer)rend).sprite = offSprite;
     }
 }

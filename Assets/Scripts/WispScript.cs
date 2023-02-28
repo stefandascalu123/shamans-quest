@@ -44,7 +44,7 @@ public class WispScript : MonoBehaviour
         if(col.gameObject.CompareTag("Player")){
             if(nextPosition == (wispPositions.Length)){
                 Destroy(gameObject);
-                switchObject.GetComponent<Switch>().on = true;
+                //switchObject.GetComponent<Switch>().on = true;
                 return;
             }else{
                 StartLerping();
