@@ -9,7 +9,7 @@ public class Switch : MonoBehaviour
     public Sprite onSprite;
     public Sprite offSprite;
     private Renderer switchRenderer;
-    private float cooldown = 1;
+    private float cooldown = 0.25f;
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterManager>();
@@ -36,7 +36,7 @@ public class Switch : MonoBehaviour
                 on = true; 
             else
                 on = false;
-            cooldown = 1;
+            cooldown = 0.25f;
         }
         
         if (collision.gameObject.tag == "Wisp")
