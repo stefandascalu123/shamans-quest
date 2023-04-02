@@ -14,6 +14,8 @@ public class CharacterManager : MonoBehaviour
     private float shiftTimer;
 
     [SerializeField] private TerrainChanger terrainChanger;
+
+    [SerializeField] private AudioSource changeEffect;
     void Start()
     {
         shiftTimer = 0;
@@ -27,6 +29,7 @@ public class CharacterManager : MonoBehaviour
         shiftTimer -= Time.fixedDeltaTime;
         if(Input.GetMouseButton(0) && shiftTimer <= 0 && terrainChanger.shiftEnabled)
         {
+            changeEffect.Play();
             if (!isSpirit) 
             {
                 animator.runtimeAnimatorController = spiritController;

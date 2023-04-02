@@ -16,6 +16,14 @@ public class Movement : MonoBehaviour
 	[SerializeField] private Vector2 _groundCheckSize = new Vector2(0.85f, 0.03f);
     [SerializeField] private LayerMask _groundLayer;
 
+
+    [SerializeField] private AudioSource jumpEffect;
+    [SerializeField] private AudioSource landEffect;
+    [SerializeField] private AudioSource walkingEffect;
+
+
+    int flag = 0;
+
     public Vector2 _moveInput;
     private Animator animator;
     void Start()
@@ -30,6 +38,11 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         IsGrounded = Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer);
+
+        if(!IsGrounded){
+            flag = 1;
+        }
+
         LastOnGroundTime -= Time.deltaTime;
         animator.SetBool("IsGround", IsGrounded);
         if (CanMove)
@@ -40,13 +53,26 @@ public class Movement : MonoBehaviour
         }
             
 
+        if(flag == 1){
+            if(IsGrounded){
+                landEffect.Play();
+                flag = 0;
+            }
+        }
+
+
         if (_moveInput.x != 0)
         {
+            if(IsGrounded)
+                walkingEffect.enabled = true;
+            else
+                walkingEffect.enabled = false;
             animator.SetBool("IsRunning", true);
             CheckDirectionToFace(_moveInput.x > 0);
         }
         else
         {
+            walkingEffect.enabled = false;
             animator.SetBool("IsRunning", false);
         }
 
@@ -118,6 +144,7 @@ public class Movement : MonoBehaviour
 		if (rb.velocity.y < 0)
 	        force -= rb.velocity.y;
 
+        jumpEffect.Play();
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
