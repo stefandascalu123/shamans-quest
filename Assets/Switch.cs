@@ -11,6 +11,8 @@ public class Switch : MonoBehaviour
     private Renderer switchRenderer;
     public ToggleOnOff toggle;
 
+    [SerializeField] private AudioSource flickEffect;
+
     private float cooldown = 0.25f;
     void Start()
     {
@@ -35,6 +37,7 @@ public class Switch : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player" && Input.GetKey("e") && cooldown <=0)
         {
+            flickEffect.Play();
             if (!on)
                 on = true; 
             else
