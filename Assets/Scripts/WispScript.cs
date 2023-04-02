@@ -14,7 +14,9 @@ public class WispScript : MonoBehaviour
 
     private Vector3 start;
     private Vector3 stop;
-    public GameObject switchObject;
+
+    [SerializeField] private AudioSource moveEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,7 @@ public class WispScript : MonoBehaviour
                 //switchObject.GetComponent<Switch>().on = true;
                 return;
             }else{
+                moveEffect.Play();
                 StartLerping();
             }
         }
