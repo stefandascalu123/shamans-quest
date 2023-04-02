@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 public class LevelChanger : MonoBehaviour
@@ -19,7 +18,9 @@ public class LevelChanger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (transform.parent.GetComponent<Switchable>().open && collider.gameObject.tag == "Player")
-            endText.enabled = true;
+        {
+            SceneManager.LoadScene("Level 1");
+        }
     }
 
 }
