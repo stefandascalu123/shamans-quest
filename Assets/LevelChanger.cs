@@ -4,7 +4,8 @@ using TMPro;
 public class LevelChanger : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TMP_Text endText;
+    public GameObject endText;
+    public int level;
     void Start()
     {
         
@@ -19,7 +20,11 @@ public class LevelChanger : MonoBehaviour
     {
         if (transform.parent.GetComponent<Switchable>().open && collider.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("Level 1");
+            if(level == 0)
+                SceneManager.LoadScene("Level 1");
+
+            if(level == 1)
+                endText.SetActive(true);
         }
     }
 

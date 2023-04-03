@@ -8,6 +8,8 @@ public class Switchable : MonoBehaviour
     public Sprite onSprite;
     public Sprite offSprite;
     private Renderer rend;
+    public int type;
+    [SerializeField] private GameObject col;
 
     public bool open = false;
     void Start()
@@ -18,18 +20,28 @@ public class Switchable : MonoBehaviour
     {
         foreach(GameObject switchObj in switches)
         {
-            bool on = switchObj.GetComponent<ToggleOnOff>().powered;
-            if (on == false)
+            if(type == 0)
+            if (switchObj.GetComponent<SwitchTwo>().on == false)
             {
                 open = false;
                 break;
             }
+            if(type == 1)
+            if (switchObj.GetComponent<ToggleOnOff>().powered == false)
+            {
+                open = false;
+                break;
+            }
+            
             open = true;
         }
-        if (open)
+        if (open){
             // fancy animation instead of disabling sper
+           col.SetActive(false);
             ((SpriteRenderer)rend).sprite = onSprite;
-        else
+        }else{
+            col.SetActive(true);
             ((SpriteRenderer)rend).sprite = offSprite;
+        }
     }
 }
